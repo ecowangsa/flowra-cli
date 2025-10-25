@@ -117,3 +117,14 @@ test('list command is available outside Flowra projects', { concurrency: false }
   assert.equal(result.errors.length, 0);
   assert.ok(result.logs.some((line) => line.includes('create-app')));
 });
+
+test('running the CLI without arguments displays the banner', { concurrency: false }, async (t) => {
+  const tempDir = await createTempDir();
+  t.after(() => fs.rm(tempDir, { recursive: true, force: true }));
+
+  const result = await runCli([], tempDir);
+  assert.equal(result.exitCode, 0);
+  assert.equal(result.errors.length, 0);
+  assert.ok(result.logs.some((line) => line.includes('Flowra CLI')));
+  assert.ok(result.logs.some((line) => line.includes('flowra list')));
+});

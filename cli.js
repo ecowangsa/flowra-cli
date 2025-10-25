@@ -2,6 +2,25 @@
 
 const { buildProgram } = require('./CLI/cli.program');
 const { CLIError } = require('./CLI/utils/project');
+const pkg = require('./package.json');
+
+function printBanner() {
+  const lines = [
+    'Flowra CLI',
+    `Version: ${pkg.version}`,
+    'Create, serve, and manage Flowra applications from the command line.',
+    '',
+    'Usage:',
+    '  flowra <command>',
+    '',
+    'Run "flowra list" to explore available commands.',
+  ];
+
+  for (const line of lines) {
+    // eslint-disable-next-line no-console
+    console.log(line);
+  }
+}
 
 /**
  * Runs the CLI using the provided argv array. Any unhandled errors are caught
@@ -21,6 +40,12 @@ async function run(argv) {
       write(`\nError: ${str.trim()}\n`);
     },
   });
+
+  const tokens = Array.isArray(argv) ? argv.slice(2) : [];
+  if (tokens.length === 0) {
+    printBanner();
+    return;
+  }
 
   try {
     await program.parseAsync(argv);
