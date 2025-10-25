@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Welcome to the Flowra Framework – a clean, scalable, and beautiful Node.js foundation for modern developers."
+    />
+    <title>Welcome to Flowra Framework</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/css/welcome.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <div class="background-wave" aria-hidden="true"></div>
+
+      <header class="page-header">
+        <div class="brand-and-nav">
+          <div class="brand">
+            <div class="brand-mark" aria-hidden="true">
+              <img
+                src="/imgs/flowra.png"
+                alt="Flowra Logo"
+                class="brand-logo"
+              />
+            </div>
+            <span class="brand-name" aria-label="flowra">flowra</span>
+          </div>
+        </div>
+
+        <nav class="meta">
+          <span class="meta-item">
+            <span class="label">Environment</span>
+            <span class="value"><%= metadata.environment %></span>
+          </span>
+          <span class="meta-divider" role="presentation">•</span>
+          <span class="meta-item">
+            <span class="label">Node.js</span>
+            <span class="value"><%= metadata.nodeVersion %></span>
+          </span>
+          <span class="meta-divider" role="presentation">•</span>
+          <span class="meta-item">
+            <span class="label">Uptime</span>
+            <span class="value"><%= metadata.uptime %></span>
+          </span>
+        </nav>
+      </header>
+
+      <main class="hero" role="main">
+        <div class="hero-content">
+          <p class="tagline">Flow with clarity</p>
+          <h1>Welcome to Flowra Framework</h1>
+          <p class="subheadline">
+            A Clean, Scalable, and Beautiful Node.js Framework for Modern Developers.
+          </p>
+          <p class="philosophy">
+            Flowra is inspired by the effortless movement of water (mili). We believe in flow, clarity, and
+            maintainability principles that let your ideas travel smoothly from concept to deployment with
+            confidence and grace.
+          </p>
+          <div class="quick-links" aria-label="Quick start links">
+            <a
+              class="quick-link"
+              href="<%= githubLink %>"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub Repo
+            </a>
+          </div>
+        </div>
+
+        <aside class="feature-card" aria-label="Framework highlights">
+          <h2>Why Flowra?</h2>
+          <ul>
+            <li>
+              <strong>Elegant foundations:</strong> Opinionated patterns keep your architecture calm and confident.
+            </li>
+            <li>
+              <strong>Scalable core:</strong> Modular design lets your application grow organically without friction.
+            </li>
+            <li>
+              <strong>Developer experience:</strong> Thoughtful tooling so you can focus on delivering value.
+            </li>
+          </ul>
+        </aside>
+      </main>
+
+      <footer class="page-footer">
+        <p>© <%= currentYear %> Flowra Core Team. Crafted for builders.</p>
+      </footer>
+    </div>
+  </body>
+</html>
