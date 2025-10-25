@@ -1,6 +1,7 @@
 'use strict';
 
 const fs = require('fs/promises');
+const fsSync = require('fs');
 const path = require('path');
 
 /**
@@ -25,6 +26,23 @@ class CLIError extends Error {
 async function readJsonFile(filePath) {
   try {
     const contents = await fs.readFile(filePath, 'utf8');
+    return JSON.parse(contents);
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      return null;
+    }
+
+    if (error.name === 'SyntaxError') {
+      throw new CLIError(`Failed to parse JSON file at ${filePath}: ${error.message}`);
+    }
+
+    throw new CLIError(`Unable to read ${filePath}: ${error.message}`);
+  }
+}
+
+function readJsonFileSync(filePath) {
+  try {
+    const contents = fsSync.readFileSync(filePath, 'utf8');
     return JSON.parse(contents);
   } catch (error) {
     if (error.code === 'ENOENT') {
@@ -66,6 +84,23 @@ async function findFlowraProjectRoot(startDir) {
 
   while (true) {
     const pkg = await readJsonFile(path.join(current, 'package.json'));
+    if (packageHasFlowra(pkg)) {
+      return current;
+    }
+
+    const parent = path.dirname(current);
+    if (parent === current) {
+      return null;
+    }
+    current = parent;
+  }
+}
+
+function findFlowraProjectRootSync(startDir) {
+  let current = path.resolve(startDir);
+
+  while (true) {
+    const pkg = readJsonFileSync(path.join(current, 'package.json'));
     if (packageHasFlowra(pkg)) {
       return current;
     }
@@ -195,6 +230,7 @@ function toPackageName(name) {
 module.exports = {
   CLIError,
   findFlowraProjectRoot,
+  findFlowraProjectRootSync,
   ensureFlowraProject,
   ensureTargetDirectory,
   toPackageName,

@@ -2,7 +2,7 @@
 
 const fs = require('fs/promises');
 const path = require('path');
-const pkg = require('../../../package.json');
+const pkg = require('../../package.json');
 const {
   CLIError,
   findFlowraProjectRoot,

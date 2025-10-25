@@ -1,10 +1,8 @@
 const { spawn } = require('child_process');
 const path = require('path');
 
-const { createApp } = require('../../../app/Bootstrap/server.bootstrap');
-const { buildContainer } = require('../../../app/Bootstrap/Container/container.module');
-const HttpRouter = require('../../../app/Http/http.router');
 const { toKebabCase } = require('../utils/case-utils');
+const { loadProjectModule } = require('../utils/flowra-project');
 
 function joinRoutePath(base, segment) {
   const parts = [base, segment]
@@ -84,6 +82,9 @@ function extractRoutesFromRouter(router, basePath = '') {
 }
 
 function listHttpRoutes() {
+  const { buildContainer } = loadProjectModule('app/Bootstrap/Container/container.module.js');
+  const HttpRouter = loadProjectModule('app/Http/http.router.js');
+
   const container = buildContainer();
   const router = new HttpRouter(container).defineRoutes();
   const routes = extractRoutesFromRouter(router);
@@ -97,6 +98,7 @@ function listHttpRoutes() {
 }
 
 function startHttpServer({ port: overridePort } = {}) {
+  const { createApp } = loadProjectModule('app/Bootstrap/server.bootstrap.js');
   const { app, container } = createApp();
   const config = container.resolve('config');
   const logger = container.resolve('logger');

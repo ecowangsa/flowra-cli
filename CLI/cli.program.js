@@ -1,5 +1,5 @@
-const { Command } = require('commander');
-const pkg = require('../../package.json');
+const { Command } = require('./lib/command');
+const pkg = require('../package.json');
 
 const registerServeCommands = require('./commands/serve.commands');
 const registerCreateAppCommand = require('./commands/create-app.command');

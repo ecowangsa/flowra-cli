@@ -1,4 +1,4 @@
-const { buildContainer } = require('../../../app/Bootstrap/Container/container.module');
+const { loadProjectModule } = require('../utils/flowra-project');
 
 function registerConfigCommands(program) {
   program
@@ -6,6 +6,7 @@ function registerConfigCommands(program) {
     .description('Print active runtime configuration.')
     .option('--namespace <namespace>', 'Configuration namespace to inspect')
     .action((options) => {
+      const { buildContainer } = loadProjectModule('app/Bootstrap/Container/container.module.js');
       const container = buildContainer();
       const config = container.resolve('config');
       const namespace = options.namespace ? String(options.namespace).toLowerCase() : undefined;

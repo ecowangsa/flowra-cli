@@ -1,9 +1,9 @@
-const knexFactory = require('knex');
-
-const databaseConfig = require('../../../app/Config/Database');
+const { loadProjectModule } = require('../utils/flowra-project');
 
 async function verifyDatabaseConnections() {
   const results = [];
+  const databaseConfig = loadProjectModule('app/Config/Database.js');
+  const knexFactory = loadProjectModule('node_modules/knex');
   const connections = databaseConfig.connections || {};
 
   // eslint-disable-next-line no-restricted-syntax

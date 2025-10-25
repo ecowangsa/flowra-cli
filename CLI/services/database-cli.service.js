@@ -1,16 +1,16 @@
 const path = require('path');
 
-const knexFactory = require('knex');
-
-const ormConfig = require('../../../orm.cli.config');
+const { loadProjectModule } = require('../utils/flowra-project');
 const { ensureDir } = require('../utils/file-system');
 
 function buildOrmConfig(alias, overrides = {}) {
+  const ormConfig = loadProjectModule('orm.cli.config.js');
   return ormConfig.buildConfig({ connectionName: alias, ...overrides });
 }
 
 async function withKnex(alias, task) {
   const config = buildOrmConfig(alias);
+  const knexFactory = loadProjectModule('node_modules/knex');
   const knex = knexFactory(config);
   try {
     return await task(knex, config);
