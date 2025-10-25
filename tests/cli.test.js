@@ -22,6 +22,7 @@ async function runCli(args, cwd) {
   const originalExitCode = process.exitCode;
   const originalLog = console.log;
   const originalError = console.error;
+  const originalTable = console.table;
   const logs = [];
   const errors = [];
 
@@ -38,6 +39,20 @@ async function runCli(args, cwd) {
     console.error = (...messages) => {
       errors.push(messages.join(' '));
     };
+    console.table = (data, properties) => {
+      const rows = Array.isArray(data) ? data : [data];
+      for (const row of rows) {
+        if (row && typeof row === 'object') {
+          const values = (properties && properties.length
+            ? properties.map((prop) => row[prop])
+            : Object.values(row)
+          ).map((value) => String(value));
+          logs.push(values.join(' | '));
+        } else {
+          logs.push(String(row));
+        }
+      }
+    };
 
     await run(['node', 'flowra', ...args]);
   } finally {
@@ -46,6 +61,7 @@ async function runCli(args, cwd) {
     }
     console.log = originalLog;
     console.error = originalError;
+    console.table = originalTable;
   }
 
   const exitCode = process.exitCode ?? 0;

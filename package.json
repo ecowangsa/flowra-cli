@@ -8,7 +8,9 @@
   "scripts": {
     "test": "node --test"
   },
-  "dependencies": {},
+  "dependencies": {
+    "commander": "^11.1.0"
+  },
   "peerDependencies": {
     "flowra": ">=0.1.0"
   },

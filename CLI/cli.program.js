@@ -1,4 +1,4 @@
-const { Command } = require('./lib/command');
+const { Command } = require('commander');
 const pkg = require('../package.json');
 
 const registerServeCommands = require('./commands/serve.commands');
@@ -37,15 +37,28 @@ function buildProgram() {
     .command('list')
     .description('List all available commands')
     .action(() => {
-      // eslint-disable-next-line no-console
-      program.commands
-        .filter((command) => command.name() !== 'list')
-        .forEach((command) => {
-          const aliases = command.aliases ? command.aliases() : [];
-          const label = [command.name(), ...aliases].join(', ');
-          // eslint-disable-next-line no-console
-          console.log(`${label.padEnd(25)} ${command.description()}`);
+      const rows = program.commands
+        .filter((command) => {
+          const name = command.name();
+          return name !== 'list' && name !== 'help';
+        })
+        .map((command) => {
+          const aliases = command.aliases();
+          return {
+            Command: command.name(),
+            Aliases: aliases.length ? aliases.join(', ') : '—',
+            Description: command.description(),
+          };
         });
+
+      if (rows.length === 0) {
+        // eslint-disable-next-line no-console
+        console.log('No commands registered.');
+        return;
+      }
+
+      // eslint-disable-next-line no-console
+      console.table(rows);
     });
 
   program.hook('preAction', async (thisCommand, actionCommand) => {
