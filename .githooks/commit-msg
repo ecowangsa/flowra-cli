@@ -1,0 +1,4 @@
+#!/bin/sh
+
+ROOT="$(git rev-parse --show-toplevel)"
+node "$ROOT/scripts/commitlint.js" --edit "$1"

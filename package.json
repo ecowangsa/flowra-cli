@@ -1,0 +1,53 @@
+{
+  "name": "flowra-cli",
+  "version": "1.0.3",
+  "description": "The official CLI tool for Flowra Framework — create, serve, and manage Flowra projects.",
+  "homepage": "https://github.com/ecowangsa/flowra-cli",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ecowangsa/flowra-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ecowangsa/flowra-cli/issues"
+  },
+  "bin": {
+    "flowra": "./bin/flowra.js"
+  },
+  "scripts": {
+    "test": "node --test",
+    "lint": "node scripts/lint.js",
+    "pack:verify": "node scripts/pack-verify.js",
+    "prepublishOnly": "npm test",
+    "release:verify": "node scripts/release-verify.js",
+    "commitlint": "node scripts/commitlint.js",
+    "commitlint:edit": "node scripts/commitlint.js --edit",
+    "commitlint:msg": "node scripts/commitlint.js --message",
+    "hooks:install": "node scripts/install-hooks.js",
+    "prepare": "node scripts/install-hooks.js --allow-missing",
+    "release:patch": "npm test && npm version patch && npm run release:verify && git push --follow-tags",
+    "release:minor": "npm test && npm version minor && npm run release:verify && git push --follow-tags",
+    "release:major": "npm test && npm version major && npm run release:verify && git push --follow-tags"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "bin/",
+    "CLI/",
+    "cli.js",
+    "README.md"
+  ],
+  "dependencies": {
+    "commander": "^11.1.0"
+  },
+  "peerDependencies": {
+    "flowra": ">=0.1.0"
+  },
+  "peerDependenciesMeta": {
+    "flowra": {
+      "optional": true
+    }
+  },
+  "author": "Flowra Framework Team <dev@flowra.id>",
+  "license": "MIT"
+}

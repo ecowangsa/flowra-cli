@@ -1,0 +1,74 @@
+{
+  "name": "__PACKAGE_NAME__",
+  "version": "1.0.0",
+  "description": "__PROJECT_DISPLAY_NAME__ — A modular, expressive Node.js framework project.",
+  "main": "main/app.js",
+  "exports": {
+    ".": "./main/app.js",
+    "./server": "./app/Bootstrap/server.bootstrap.js",
+    "./container": "./app/Bootstrap/Container/container.module.js",
+    "./http": "./app/Http/http.router.js",
+    "./app": "./app/Bootstrap/server.bootstrap.js"
+  },
+  "scripts": {
+    "start": "flowra serve",
+    "dev": "flowra serve:watch",
+    "lint": "echo 'Run eslint to lint the project'",
+    "format": "echo 'Run prettier --check .'",
+    "test": "npm run test:unit",
+    "test:unit": "node --test",
+    "test:integration": "node --test --test-name-pattern=\"integration\""
+  },
+  "homepage": "https://flowra.id",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ecowangsa/flowra-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ecowangsa/flowra-cli/issues",
+    "email": "dev@flowra.id"
+  },
+  "keywords": [
+    "flowra",
+    "framework",
+    "nodejs",
+    "cli",
+    "expressive",
+    "dependency-injection",
+    "modular",
+    "backend",
+    "typescript",
+    "rest-api"
+  ],
+  "author": "Flowra Framework Team <dev@flowra.id>",
+  "license": "MIT",
+  "dependencies": {
+    "ansi-colors": "^4.1.3",
+    "awilix": "^12.0.5",
+    "bcrypt": "^6.0.0",
+    "body-parser": "^1.20.2",
+    "commander": "^12.1.0",
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "env2": "^2.2.2",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "helmet": "^8.1.0",
+    "knex": "^3.1.0",
+    "moment-timezone": "^0.5.45",
+    "morgan": "^1.10.1",
+    "mysql2": "^3.2.0",
+    "redis": "^4.6.10",
+    "routergroup": "^1.0.0",
+    "sequelize": "^6.29.3",
+    "validator": "^13.9.0",
+    "winston": "^3.18.3"
+  },
+  "devDependencies": {
+    "flowra-cli": "__FLOWRA_VERSION__",
+    "nodemon": "^3.1.10"
+  }
+}

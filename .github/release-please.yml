@@ -1,0 +1,4 @@
+primaryBranch: main
+releaseType: node
+changelogPath: CHANGELOG.md
+pullRequestTitlePattern: "chore(release): v${version}"

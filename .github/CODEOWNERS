@@ -1,0 +1,17 @@
+# Default owners
+* @ecowangsa
+
+# CLI core
+/CLI/ @ecowangsa
+/CLI/templates/ @ecowangsa
+/bin/ @ecowangsa
+/cli.js @ecowangsa
+/tests/ @ecowangsa
+
+# Docs
+/README.md @ecowangsa
+/CHANGELOG.md @ecowangsa
+/CONTRIBUTING.md @ecowangsa
+/CODE_OF_CONDUCT.md @ecowangsa
+/SECURITY.md @ecowangsa
+/RELEASING.md @ecowangsa
